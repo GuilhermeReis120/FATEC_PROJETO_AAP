@@ -1,0 +1,3 @@
+[submodule "Dev_projeto_aap_fatec"]
+	path = Dev_projeto_aap_fatec
+	url = git@github.com:GuilhermeReis120/DEV_FATEC_PROJETO_AAP.git
