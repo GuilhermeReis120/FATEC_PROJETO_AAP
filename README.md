@@ -1,6 +1,6 @@
 # 📁 FATEC — Projeto AAP
 
-> Repositório central de documentação do projeto de Aprendizagem em Processo (AAP) da FATEC.
+> Repositório central de documentação do **projeto interdisciplinar** da FATEC.
 
 ---
 
