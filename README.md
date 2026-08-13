@@ -1,127 +1,117 @@
-# 📁 FATEC — Projeto AAP
-
-> Repositório central de documentação do **projeto interdisciplinar** da FATEC.
-
+# 📁 FATEC — Projeto Integrador (NexusDev)
+ 
+> Repositório central do **Projeto Integrador (PI)** da FATEC Barueri.
+ 
 ---
-
+ 
 ## 📌 Sobre o Projeto
-
-Este repositório faz parte do **Projeto Interdisciplinar** do curso de **Gestão da Tecnologia da Infomração(GTI)** da FATEC Barueri.
-
-A proposta da disciplina consiste em **identificar uma empresa real de pequeno porte** e, a partir de suas necessidades, **criar ou melhorar um sistema de software** que agregue valor ao negócio.
-
+ 
+Este repositório contém o **Projeto Integrador** do curso de **Gestão da Tecnologia da Informação (GTI)** da FATEC Barueri, desenvolvido por uma equipe de 7 alunos.
+ 
+A proposta consiste em **identificar uma empresa real de pequeno porte** e, a partir de suas necessidades, **criar ou melhorar um sistema de software** que agregue valor ao negócio.
+ 
 ### A empresa parceira
-
-A empresa escolhida é uma **software house** — uma empresa que desenvolve sistemas e soluções digitais para clientes. Como toda software house em fase de crescimento, ela enfrenta desafios comuns: gerenciar leads e clientes, acompanhar projetos em andamento, organizar sprints e centralizar a comunicação entre equipes e clientes.
-
-### A solução proposta
-
+ 
+A empresa escolhida é uma **software house** (Cristal) — uma empresa que desenvolve sistemas e soluções digitais para clientes. Como toda software house em fase de crescimento, ela enfrenta desafios comuns: gerenciar leads e clientes, acompanhar projetos em andamento, organizar sprints e centralizar a comunicação entre equipes e clientes.
+ 
+### A solução proposta — NexusDev
+ 
 Desenvolvimento de um sistema web integrado de **CRM + Gestor de Projetos**, construído sob medida para as necessidades operacionais da software house parceira.
-
+ 
 O sistema permitirá:
-
+ 
 - **CRM** — Gerenciamento do ciclo de vida do cliente: desde o primeiro contato (lead) até o pós-venda, com histórico de interações, propostas e contratos
 - **Gestor de Projetos** — Acompanhamento de projetos em andamento, organização de sprints, controle de tarefas e visualização do progresso por equipe
-
 ---
-
-## 🏗️ Estrutura dos Repositórios
-
-Este projeto está dividido em **dois repositórios Git** com responsabilidades bem definidas:
-
+ 
+## 🏗️ Estrutura do Repositório
+ 
+Diferente de projetos anteriores, este é um **repositório único**, sem submódulos. Código e documentação convivem na mesma árvore de pastas.
+ 
 ```
-FATEC_PROJETO_AAP/                    ← Você está aqui
-├── Dev_projeto_aap_fatec/            ← Submodule → código-fonte
-├── Documentação/                     ← Toda a documentação do projeto
-│   ├── padronização_git.md           ← Guia de uso do Git neste projeto
-│   └── ...                          ← Diagramas, relatórios, protótipos, etc.
-└── .gitmodules
+NexusDev/
+├── backend/                  ← Código Laravel (API, migrations, controllers)
+├── frontend/                 ← Código Vue.js
+├── database/                 ← Scripts e modelagem de banco
+├── docs/
+│   ├── BPMN/                 ← Diagramas de processos da empresa parceira
+│   ├── Declaracao_PI/        ← Declaração e escopo do Projeto Integrador
+│   ├── DER/                  ← Modelagem do banco de dados
+│   ├── Monografia/           ← Monografia do PI
+│   └── CONTRIBUTING.md       ← Guia de padronização Git do projeto
+├── .gitignore
+└── README.md
 ```
-
-| Repositório | Responsabilidade |
-|---|---|
-| **`FATEC_PROJETO_AAP`** *(este)* | Central de documentação: diagramas BPMN, modelagem de dados, protótipos, relatórios, regras de negócio, guias de uso, monográfia. |
-| **`DEV_FATEC_PROJETO_AAP`** *(submodule)* | Todo o código-fonte: backend Laravel, frontend Vue.js, configurações Docker e scripts de banco |
-
-> **Regra simples:** Se é documentação → vai aqui. Se é código → vai no submodule.
-
+ 
+> **Regra simples:** tudo — código e documentação — vive neste mesmo repositório. Não há mais divisão em repositório principal + submodule de desenvolvimento.
+ 
 ---
-
+ 
 ## 💻 Stack de Tecnologia
-
-| Camada | Tecnologia |
+ 
+A stack ainda está **em definição** pela equipe. Até o momento, as tecnologias em uso/avaliação são:
+ 
+| Camada | Tecnologia (em avaliação) |
 |---|---|
 | Backend | Laravel (PHP) |
 | Frontend | Vue.js 3 |
 | Banco de Dados | MySQL |
 | Infraestrutura | Docker + Docker Compose |
-| Versionamento | Git + GitHub (com submodule) |
-
+| Versionamento | Git + GitHub (repositório único) |
+ 
+Este quadro será atualizado conforme a equipe fechar as decisões de arquitetura.
+ 
 ---
-
+ 
 ## 🚀 Como Clonar o Projeto
-
-> Atenção: o projeto usa **Git Submodule**. É necessário clonar com a flag correta para obter o código de desenvolvimento junto.
-
+ 
 ```bash
-# Clone completo (repositório principal + submodule de desenvolvimento)
-git clone --recurse-submodules git@github.com:GuilhermeReis120/FATEC_PROJETO_AAP.git
+git clone git@github.com:<org>/NexusDev.git
+cd NexusDev
 ```
-
-Se você já clonou sem o submodule e a pasta `Dev_projeto_aap_fatec` está vazia:
-
-```bash
-git submodule init
-git submodule update
-```
-
-Para acessar o repositório de desenvolvimento diretamente:
-
-```bash
-cd Dev_projeto_aap_fatec
-```
-
+ 
+Não há mais necessidade de `--recurse-submodules` — um clone padrão já traz todo o código e a documentação.
+ 
 ---
-
+ 
 ## 📂 Documentação
-
-Toda a documentação do projeto está centralizada na pasta [`Documentação/`](./Documentação/).
-
+ 
+Toda a documentação do projeto está centralizada na pasta [`docs/`](./docs/).
+ 
 | Arquivo / Pasta | Conteúdo |
 |---|---|
-| `padronização_git.md` | Guia completo de uso do Git neste projeto: commits, branches, PRs e submodule |
-| *(em construção)* | Diagramas BPMN dos processos da empresa |
-| *(em construção)* | Modelagem do banco de dados (DER) |
-| *(em construção)* | Protótipos de telas (Figma / wireframes) |
-| *(em construção)* | Regras de negócio e requisitos do sistema |
-
+| `docs/CONTRIBUTING.md` | Guia completo de uso do Git neste projeto: commits, branches e PRs |
+| `docs/BPMN/` | Diagramas BPMN dos processos da empresa parceira |
+| `docs/Declaracao_PI/` | Declaração e escopo do Projeto Integrador |
+| `docs/DER/` | Modelagem do banco de dados |
+| `docs/Monografia/` | Monografia do PI |
+ 
 ---
-
+ 
 ## 🔗 Links Rápidos
-
-- 🔧 [Repositório de Desenvolvimento (Submodule)](https://github.com/GuilhermeReis120/DEV_FATEC_PROJETO_AAP)
-- 📋 [Guia de Padronização Git](./Documentação/padronização_git.md)
-
+ 
+- 📋 [Guia de Padronização Git](./docs/CONTRIBUTING.md)
 ---
-
+ 
 ## 👥 Equipe
-
+ 
 | Nome | Função |
 |---|---|
-| Guilherme Reis | Dev Full-Stack / Documentação |
+| Guilherme Reis | Scrum Master / Dev Full-Stack |
 | *(adicionar membros)* | — |
-
+ 
 ---
-
+ 
 ## 🎓 Informações Acadêmicas
-
+ 
 | Campo | Informação |
 |---|---|
-| Instituição | FATEC |
+| Instituição | FATEC Barueri |
 | Curso | Gestão da Tecnologia da Informação |
 | Disciplina | Projeto Integrador |
 | Ano/Semestre (Início) | 2026/01 |
-
+ 
 ---
-
-*Repositório principal — documentação e estrutura do projeto. Para o código-fonte, acesse o [submodule de desenvolvimento](https://github.com/GuilhermeReis120/DEV_FATEC_PROJETO_AAP).*
+ 
+*Repositório único — código e documentação do Projeto Integrador NexusDev.*
+ 
