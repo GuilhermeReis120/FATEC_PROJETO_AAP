@@ -80,6 +80,7 @@ Toda a documentação do projeto está centralizada na pasta [`docs/`](./docs/).
 ## 🔗 Links Rápidos
 
 - 📋 [Guia de Padronização Git](./docs/CONTRIBUTING.md)
+- 📋 [Prompts para padronizar respostas de IA](./docs/prompts/)
 ---
 
 ## 👥 Equipe
