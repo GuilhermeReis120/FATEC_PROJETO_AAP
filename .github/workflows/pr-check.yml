@@ -89,3 +89,14 @@ jobs:
             fi
           done < <(find docs -type f -print0)
           exit $FAIL
+
+  source-branch-check:
+    name: Verifica branch de origem
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirma que o PR vem de 'stage'
+        run: |
+          if [ "${{ github.head_ref }}" != "stage" ]; then
+            echo "::error::PRs para 'main' só são permitidos a partir da branch 'stage'. Origem detectada: ${{ github.head_ref }}"
+            exit 1
+          fi
