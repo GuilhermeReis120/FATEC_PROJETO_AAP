@@ -1,0 +1,91 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  mergeable-check:
+    name: Verifica conflitos com a main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configura git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Tenta simular o merge com a main
+        run: |
+          git fetch origin main
+          git merge --no-commit --no-ff origin/main
+          if [ $? -ne 0 ]; then
+            echo "::error::Conflito detectado entre esta branch e a main. Resolva antes de seguir com o PR."
+            exit 1
+          fi
+
+  structure-check:
+    name: Verifica estrutura do repositório
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Confirma pasta docs/ obrigatória
+        run: |
+          test -d "docs" || (echo "::error::Pasta 'docs' não encontrada na raiz do repositório." && exit 1)
+          echo "Pasta docs/ ok."
+
+  docs-validation:
+    name: Valida arquivos em docs/
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verifica extensões permitidas
+        run: |
+          ALLOWED_EXT="docx pdf md xlsx pptx png jpg jpeg"
+          FAIL=0
+          while IFS= read -r -d '' file; do
+            ext="${file##*.}"
+            ext_lower=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
+            match=0
+            for a in $ALLOWED_EXT; do
+              [ "$ext_lower" = "$a" ] && match=1
+            done
+            if [ "$match" -eq 0 ]; then
+              echo "::error file=$file::Extensão não permitida em docs/: .$ext"
+              FAIL=1
+            fi
+          done < <(find docs -type f -print0)
+          exit $FAIL
+
+      - name: Verifica tamanho máximo de arquivo (50MB)
+        run: |
+          MAX_SIZE=$((50 * 1024 * 1024))
+          FAIL=0
+          while IFS= read -r -d '' file; do
+            size=$(stat -c%s "$file")
+            if [ "$size" -gt "$MAX_SIZE" ]; then
+              echo "::error file=$file::Arquivo excede 50MB ($((size / 1024 / 1024))MB)."
+              FAIL=1
+            fi
+          done < <(find docs -type f -print0)
+          exit $FAIL
+
+      - name: Verifica nomes de arquivo problemáticos
+        run: |
+          FAIL=0
+          while IFS= read -r -d '' file; do
+            base=$(basename "$file")
+            if echo "$base" | grep -qE '[<>:"\\|?*]'; then
+              echo "::error file=$file::Nome de arquivo contém caractere inválido."
+              FAIL=1
+            fi
+          done < <(find docs -type f -print0)
+          exit $FAIL
