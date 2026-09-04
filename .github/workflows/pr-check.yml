@@ -100,3 +100,21 @@ jobs:
             echo "::error::PRs para 'main' só são permitidos a partir da branch 'stage'. Origem detectada: ${{ github.head_ref }}"
             exit 1
           fi
+
+  auto-merge:
+    name: Habilita auto-merge para main
+    needs: [mergeable-check, structure-check, docs-validation, source-branch-check]
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.ref == 'stage'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Habilita auto-merge no PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} \
+            --squash \
+            --auto \
+            --repo ${{ github.repository }}
