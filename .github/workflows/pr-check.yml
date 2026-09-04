@@ -4,6 +4,14 @@ on:
   pull_request:
     branches: [ main ]
 
+concurrency:
+  group: pr-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   mergeable-check:
     name: Verifica conflitos com a main
@@ -22,8 +30,7 @@ jobs:
       - name: Tenta simular o merge com a main
         run: |
           git fetch origin main
-          git merge --no-commit --no-ff origin/main
-          if [ $? -ne 0 ]; then
+          if ! git merge --no-commit --no-ff origin/main; then
             echo "::error::Conflito detectado entre esta branch e a main. Resolva antes de seguir com o PR."
             exit 1
           fi
@@ -47,10 +54,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verifica extensões permitidas
+      - name: Valida extensão, tamanho e nome dos arquivos
         run: |
           ALLOWED_EXT="docx pdf md xlsx pptx png jpg jpeg bpm net"
+          MAX_SIZE=$((50 * 1024 * 1024))
           FAIL=0
+
           while IFS= read -r -d '' file; do
             ext="${file##*.}"
             ext_lower=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
@@ -62,32 +71,20 @@ jobs:
               echo "::error file=$file::Extensão não permitida em docs/: .$ext"
               FAIL=1
             fi
-          done < <(find docs -type f -print0)
-          exit $FAIL
 
-      - name: Verifica tamanho máximo de arquivo (50MB)
-        run: |
-          MAX_SIZE=$((50 * 1024 * 1024))
-          FAIL=0
-          while IFS= read -r -d '' file; do
             size=$(stat -c%s "$file")
             if [ "$size" -gt "$MAX_SIZE" ]; then
               echo "::error file=$file::Arquivo excede 50MB ($((size / 1024 / 1024))MB)."
               FAIL=1
             fi
-          done < <(find docs -type f -print0)
-          exit $FAIL
 
-      - name: Verifica nomes de arquivo problemáticos
-        run: |
-          FAIL=0
-          while IFS= read -r -d '' file; do
             base=$(basename "$file")
             if echo "$base" | grep -qE '[<>:"\\|?*]'; then
               echo "::error file=$file::Nome de arquivo contém caractere inválido."
               FAIL=1
             fi
           done < <(find docs -type f -print0)
+
           exit $FAIL
 
   source-branch-check:
@@ -105,7 +102,9 @@ jobs:
     name: Habilita auto-merge para main
     needs: [mergeable-check, structure-check, docs-validation, source-branch-check]
     runs-on: ubuntu-latest
-    if: github.event.pull_request.head.ref == 'stage'
+    if: |
+      github.event.pull_request.head.ref == 'stage' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     permissions:
       contents: write
       pull-requests: write
@@ -118,3 +117,19 @@ jobs:
             --squash \
             --auto \
             --repo ${{ github.repository }}
+
+  notify-failure:
+    name: Notifica falha no PR
+    needs: [mergeable-check, structure-check, docs-validation, source-branch-check]
+    runs-on: ubuntu-latest
+    if: failure()
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comenta no PR sobre a falha
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --repo ${{ github.repository }} \
+            --body "⚠️ Uma ou mais verificações do PR Check falharam. Confira a aba Actions para detalhes antes de seguir com o merge."
