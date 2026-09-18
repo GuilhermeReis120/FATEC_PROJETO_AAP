@@ -97,39 +97,3 @@ jobs:
             echo "::error::PRs para 'main' só são permitidos a partir da branch 'stage'. Origem detectada: ${{ github.head_ref }}"
             exit 1
           fi
-
-  auto-merge:
-    name: Habilita auto-merge para main
-    needs: [mergeable-check, structure-check, docs-validation, source-branch-check]
-    runs-on: ubuntu-latest
-    if: |
-      github.event.pull_request.head.ref == 'stage' &&
-      github.event.pull_request.head.repo.full_name == github.repository
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - name: Habilita auto-merge no PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr merge ${{ github.event.pull_request.number }} \
-            --squash \
-            --auto \
-            --repo ${{ github.repository }}
-
-  notify-failure:
-    name: Notifica falha no PR
-    needs: [mergeable-check, structure-check, docs-validation, source-branch-check]
-    runs-on: ubuntu-latest
-    if: failure()
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Comenta no PR sobre a falha
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
-            --repo ${{ github.repository }} \
-            --body "⚠️ Uma ou mais verificações do PR Check falharam. Confira a aba Actions para detalhes antes de seguir com o merge."
