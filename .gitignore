@@ -1,3 +1,5 @@
+#Somente arquivos e pastas que não devem ser versionados pelo Git.
+# como arquivos de configuração, arquivos temporários, arquivos de log, etc.
 frontend/
 backend/
 database/
