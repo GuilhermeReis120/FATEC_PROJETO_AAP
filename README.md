@@ -1,86 +1,181 @@
-# 📁 FATEC — Projeto Integrador (NexusDev)
+# 📁 NexusDev — Projeto Integrador FATEC
 
-> Repositório central do **Projeto Integrador (PI)** da FATEC Barueri.
-
----
-
-## 📌 Sobre o Projeto
-
-Este repositório contém o **Projeto Integrador** do curso de **Gestão da Tecnologia da Informação (GTI)** da FATEC Barueri, desenvolvido por uma equipe de 7 alunos.
-
-A proposta consiste em **identificar uma empresa real de pequeno porte** e, a partir de suas necessidades, **criar ou melhorar um sistema de software** que agregue valor ao negócio.
-
-### A empresa parceira
-
-A empresa escolhida é uma **software house** (Cristal) — uma empresa que desenvolve sistemas e soluções digitais para clientes. Como toda software house em fase de crescimento, ela enfrenta desafios comuns: gerenciar leads e clientes, acompanhar projetos em andamento, organizar sprints e centralizar a comunicação entre equipes e clientes.
-
-### A solução proposta — NexusDev
-
-Desenvolvimento de um sistema web integrado de **CRM + Gestor de Projetos**, construído sob medida para as necessidades operacionais da software house parceira.
-
-O sistema permitirá:
-
-- **CRM** — Gerenciamento do ciclo de vida do cliente: desde o primeiro contato (lead) até o pós-venda, com histórico de interações, propostas e contratos
-- **Gestor de Projetos** — Acompanhamento de projetos em andamento, organização de sprints, controle de tarefas e visualização do progresso por equipe
+> Repositório central do Projeto Integrador (PI) da FATEC Barueri, com backend, frontend e documentação organizados em um mesmo monorepo.
 
 ---
 
-## 🏗️ Estrutura do Repositório
+## 📌 Sobre o projeto
 
-Diferente de projetos anteriores, este é um **repositório único**, sem submódulos. Código e documentação convivem na mesma árvore de pastas.
+Este repositório reúne o desenvolvimento do sistema NexusDev, projeto do curso de Gestão da Tecnologia da Informação (GTI), criado para atender às necessidades de uma software house parceira.
 
-```
-NexusDev/
-├── docs/
-│   ├── Backlog/               ← Backlog do projeto
-│   ├── BPMN/                  ← Diagramas de processos da empresa parceira
-│   ├── Declaracao_PI/         ← Declaração e escopo do Projeto Integrador
-│   ├── DER/                   ← Modelagem do banco de dados
-│   ├── Levantamento de Requisitos/ ← Requisitos RF e NF do projeto
-│   ├── Monografia/            ← Monografia do PI
-│   ├── prompts/                ← Prompts utilizados no projeto
-│   ├── UML/                   ← Diagramas UML
-│   └── CONTRIBUTING.md        ← Guia de padronização Git do projeto
+A proposta do sistema é integrar funcionalidades de:
+
+- CRM, para gestão de leads, clientes, históricos e propostas;
+- gestor de projetos, para acompanhamento de tarefas, sprints e progresso por equipe;
+- centralização de comunicação e organização operacional entre áreas internas e clientes.
+
+---
+
+## 🏗️ Arquitetura do repositório
+
+O projeto está organizado em um monorepo com três grandes blocos:
+
+- `backend/`: aplicação principal da API e regras de negócio;
+- `frontend/`: interface web do sistema;
+- `docs/`: documentação técnica e acadêmica do projeto.
+
+```bash
+Projeto_Fatec_AAP/
+├── .github/
+│   └── workflows/
 ├── .gitignore
+├── README.md
+├── docs/
+│   ├── Arquitetura/
+│   ├── BPMN/
+│   ├── Backlog/
+│   ├── Casos de Uso/
+│   ├── CONTRIBUTING.md
+│   ├── DER/
+│   ├── Declaracao_PI/
+│   ├── Levantamento de Requisitos/
+│   ├── Matriz_Rastreabilidade/
+│   ├── Monografia/
+│   ├── Padronizacao/
+│   ├── Requisitos_Consolidados/
+│   ├── UML/
+│   ├── prompts/
+│   └── stack/
 └── README.md
 ```
 
-> **Regra simples:** tudo — código e documentação — vive neste mesmo repositório. Não há mais divisão em repositório principal + submodule de desenvolvimento.
+> A estrutura demonstra a separação clara entre aplicação e documentação: o código da solução está em `backend/` e `frontend/`, enquanto a documentação do projeto fica em `docs/`.
 
 ---
 
-## 🚀 Como Clonar o Projeto
+## 🧩 Componentes do sistema
+
+### Backend
+
+Localizado em [`backend/`](./backend).
+
+Responsável por:
+
+- API REST / backend de aplicação;
+- autenticação e autorização;
+- regras de negócio;
+- persistência e operações com banco de dados;
+- comunicação com o frontend.
+
+Mais detalhes podem ser consultados em [backend/README.md](./backend/README.md).
+
+### Frontend
+
+Localizado em [`frontend/`](./frontend).
+
+Responsável por:
+
+- interface do sistema;
+- componentes visuais;
+- consumo da API;
+- experiência do usuário e fluxo das telas.
+
+Mais detalhes podem ser consultados em [frontend/README.md](./frontend/README.md).
+
+### Documentação
+
+Localizado em [`docs/`](./docs).
+
+Contém:
+
+- backlog;
+- BPMN;
+- DER;
+- requisitos;
+- casos de uso;
+- UML;
+- monografia;
+- material de apoio e padronização.
+
+---
+
+## 🚀 Como executar o projeto
+
+### Pré-requisitos
+
+- Git
+- Node.js e npm
+- PHP e Composer
+- Banco de dados compatível com o backend Laravel
+
+### 1) Clonar o repositório
 
 ```bash
-git clone git@github.com:<org>/NexusDev.git
-cd NexusDev
+git clone <url-do-repositorio>
+cd Projeto_Fatec_AAP
 ```
 
-Não há mais necessidade de `--recurse-submodules` — um clone padrão já traz todo o código e a documentação.
+### 2) Rodar o backend
+
+```bash
+cd backend
+cp .env.example .env
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+A aplicação backend ficará disponível em:
+
+```bash
+http://127.0.0.1:8000
+```
+
+### 3) Rodar o frontend
+
+Em outro terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+A aplicação frontend ficará disponível em:
+
+```bash
+http://localhost:5173
+```
 
 ---
 
-## 📂 Documentação
+## 📚 Documentação do projeto
 
-Toda a documentação do projeto está centralizada na pasta [`docs/`](./docs/).
+A documentação principal está centralizada em [`docs/`](./docs/).
 
-| Arquivo / Pasta | Conteúdo |
+| Pasta / Arquivo | Conteúdo |
 |---|---|
-| `docs/CONTRIBUTING.md` | Guia completo de uso do Git neste projeto: commits, branches e PRs |
-| `docs/Backlog/` | Backlog do projeto |
-| `docs/BPMN/` | Diagramas BPMN dos processos da empresa parceira |
-| `docs/Declaracao_PI/` | Declaração e escopo do Projeto Integrador |
-| `docs/DER/` | Modelagem do banco de dados |
-| `docs/Monografia/` | Monografia do PI |
-| `docs/prompts/` | Prompts utilizados no projeto |
-| `docs/UML/` | Diagramas UML |
+| [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md) | Guia de padronização Git e fluxo de contribuição |
+| [`docs/Backlog/`](./docs/Backlog) | Backlog do projeto |
+| [`docs/BPMN/`](./docs/BPMN) | Diagramas BPMN |
+| [`docs/DER/`](./docs/DER) | Modelagem de dados |
+| [`docs/Declaracao_PI/`](./docs/Declaracao_PI) | Declaração e escopo do PI |
+| [`docs/Levantamento de Requisitos/`](./docs/Levantamento%20de%20Requisitos) | Levantamento de requisitos, perfis, regras de negócio e material de análise |
+| [`docs/UML/`](./docs/UML) | Diagramas UML e casos de uso |
+| [`docs/Monografia/`](./docs/Monografia) | Arquivos da monografia |
+| [`docs/prompts/`](./docs/prompts) | Modelo de prompts e materiais de apoio |
+| [`docs/stack/`](./docs/stack) | Documentação de stack e arquitetura |
 
 ---
 
-## 🔗 Links Rápidos
+## 🔗 Links rápidos
 
-- 📋 [Guia de Padronização Git](./docs/CONTRIBUTING.md)
-- 📋 [Prompts para padronizar respostas de IA](./docs/prompts/)
+- [Guia de padronização Git](./docs/CONTRIBUTING.md)
+- [README do backend](./backend/README.md)
+- [README do frontend](./frontend/README.md)
+- [Documentação geral](./docs)
+
 ---
 
 ## 👥 Equipe
@@ -92,7 +187,7 @@ Toda a documentação do projeto está centralizada na pasta [`docs/`](./docs/).
 
 ---
 
-## 🎓 Informações Acadêmicas
+## 🎓 Informações acadêmicas
 
 | Campo | Informação |
 |---|---|
@@ -103,4 +198,4 @@ Toda a documentação do projeto está centralizada na pasta [`docs/`](./docs/).
 
 ---
 
-*Repositório único — código e documentação do Projeto Integrador NexusDev.*
+*Repositório do Projeto Integrador NexusDev — backend, frontend e documentação em um mesmo ambiente de desenvolvimento.*
