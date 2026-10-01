@@ -53,35 +53,6 @@ Projeto_Fatec_AAP/
 
 ---
 
-## 🧩 Componentes do sistema
-
-### Backend
-
-Localizado em [`backend/`](./backend).
-
-Responsável por:
-
-- API REST / backend de aplicação;
-- autenticação e autorização;
-- regras de negócio;
-- persistência e operações com banco de dados;
-- comunicação com o frontend.
-
-Mais detalhes podem ser consultados em [backend/README.md](./backend/README.md).
-
-### Frontend
-
-Localizado em [`frontend/`](./frontend).
-
-Responsável por:
-
-- interface do sistema;
-- componentes visuais;
-- consumo da API;
-- experiência do usuário e fluxo das telas.
-
-Mais detalhes podem ser consultados em [frontend/README.md](./frontend/README.md).
-
 ### Documentação
 
 Localizado em [`docs/`](./docs).
@@ -96,57 +67,6 @@ Contém:
 - UML;
 - monografia;
 - material de apoio e padronização.
-
----
-
-## 🚀 Como executar o projeto
-
-### Pré-requisitos
-
-- Git
-- Node.js e npm
-- PHP e Composer
-- Banco de dados compatível com o backend Laravel
-
-### 1) Clonar o repositório
-
-```bash
-git clone <url-do-repositorio>
-cd Projeto_Fatec_AAP
-```
-
-### 2) Rodar o backend
-
-```bash
-cd backend
-cp .env.example .env
-composer install
-php artisan key:generate
-php artisan migrate
-php artisan serve
-```
-
-A aplicação backend ficará disponível em:
-
-```bash
-http://127.0.0.1:8000
-```
-
-### 3) Rodar o frontend
-
-Em outro terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-A aplicação frontend ficará disponível em:
-
-```bash
-http://localhost:5173
-```
 
 ---
 
@@ -180,10 +100,15 @@ A documentação principal está centralizada em [`docs/`](./docs/).
 
 ## 👥 Equipe
 
-| Nome | Função |
-|---|---|
-| Guilherme Reis | Scrum Master / Dev Full-Stack |
-| *(adicionar membros)* | — |
+| Nome |
+|---|
+| Ana Beatriz |
+| Emanuela Cintra |
+| Eduarda Porcionio |
+| Priscila Ribeiro |
+| Yasmin Dias |
+| Guilherme Reis |
+
 
 ---
 
@@ -194,8 +119,9 @@ A documentação principal está centralizada em [`docs/`](./docs/).
 | Instituição | FATEC Barueri |
 | Curso | Gestão da Tecnologia da Informação |
 | Disciplina | Projeto Integrador |
-| Ano/Semestre (Início) | 2026/01 |
+| Ano/Semestre (Início) | 2026/01 / Segundo semestre |
+| Semestre Atual | Terceiro semestre|
 
 ---
 
-*Repositório do Projeto Integrador NexusDev — backend, frontend e documentação em um mesmo ambiente de desenvolvimento.*
+*Repositório do Projeto Integrador NexusDev*
