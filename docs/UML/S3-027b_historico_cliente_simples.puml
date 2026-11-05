@@ -1,0 +1,38 @@
+@startuml S3-027b_historico_cliente_simples
+title Consulta do histórico do cliente
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign left
+skinparam ParticipantPadding 40
+skinparam sequence {
+  ArrowColor #1F3864
+  LifeLineBorderColor #1F3864
+  ParticipantBorderColor #1F3864
+  ParticipantBackgroundColor #D9E2F3
+  ActorBorderColor #1F3864
+  GroupBorderColor #1F3864
+}
+autonumber "<b>00"
+
+actor "Usuário" as U
+participant "Sistema CRM" as S
+database "Banco de Dados" as DB
+
+U -> S : Seleciona o cliente
+S -> S : Verifica acesso do usuário
+
+alt Acesso negado
+  S --> U : Exibe "Acesso negado"
+else Acesso permitido
+  S -> DB : Busca interações e movimentações do cliente
+  DB --> S : Registros
+  S -> S : Ordena por data e filtra conforme o perfil
+
+  alt Histórico vazio
+    S --> U : Exibe "Nenhum registro encontrado"
+  else Histórico com registros
+    S --> U : Exibe registros em ordem cronológica
+  end
+end
+
+@enduml

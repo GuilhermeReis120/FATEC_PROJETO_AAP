@@ -1,0 +1,42 @@
+@startuml alterar_senha_simples
+title Alterar senha
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign left
+skinparam ParticipantPadding 40
+skinparam sequence {
+  ArrowColor #1F3864
+  LifeLineBorderColor #1F3864
+  ParticipantBorderColor #1F3864
+  ParticipantBackgroundColor #D9E2F3
+  ActorBorderColor #1F3864
+  GroupBorderColor #1F3864
+}
+autonumber "<b>00"
+
+actor "Usuário" as U
+participant "Sistema" as S
+database "Banco de Dados" as DB
+
+note over U, DB : Pré-condição: usuário autenticado
+
+U -> S : Solicita alterar a senha
+U -> S : Informa senha atual, nova senha e confirmação
+S -> S : Confere a senha atual
+
+alt Senha atual incorreta
+  S --> U : Exibe erro
+else Senha atual correta
+  S -> S : Valida a nova senha
+
+  alt Nova senha inválida
+    S --> U : Exibe erro
+  else Nova senha válida
+    S -> DB : Grava a nova senha (criptografada)
+    S --> U : Confirma a alteração
+  end
+end
+
+note over U, DB : Pós-condição: senha atualizada somente em caso de sucesso
+@enduml
