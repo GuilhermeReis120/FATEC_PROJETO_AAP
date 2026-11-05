@@ -1,0 +1,40 @@
+@startuml S3-027a_registro_contato_simples
+title Registro de contato com o cliente
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign left
+skinparam ParticipantPadding 40
+skinparam sequence {
+  ArrowColor #1F3864
+  LifeLineBorderColor #1F3864
+  ParticipantBorderColor #1F3864
+  ParticipantBackgroundColor #D9E2F3
+  ActorBorderColor #1F3864
+  GroupBorderColor #1F3864
+}
+autonumber "<b>00"
+
+actor "Usuário" as U
+participant "Sistema CRM" as S
+database "Banco de Dados" as DB
+
+U -> S : Seleciona o cliente
+S -> S : Verifica permissão do usuário
+
+alt Acesso negado
+  S --> U : Exibe "Acesso negado"
+else Acesso permitido
+  S --> U : Exibe formulário de interação
+  U -> S : Informa tipo, data e descrição
+  S -> S : Valida os dados
+
+  alt Dados inválidos
+    S --> U : Exibe mensagens de erro
+  else Dados válidos
+    S -> DB : Grava interação (cliente + usuário)
+    S -> DB : Atualiza histórico do cliente
+    S --> U : Confirma o registro
+  end
+end
+
+@enduml
