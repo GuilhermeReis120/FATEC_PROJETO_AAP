@@ -69,12 +69,12 @@ A documentação está organizada por assunto:
 
 ### Links úteis
 
-- [Guia de contribuição e fluxo Git](./docs/CONTRIBUTING.md)
+- [Guia de contribuição e fluxo Git](./docs/guia_contribuicao_git_github.md.md)
 - [Quadro de acompanhamento da equipe no Trello](https://trello.com/b/alTkE0Y8/209-aap2-aap3-c%C3%B3digo5)
 
 ## Fluxo de contribuição
 
-As contribuições devem seguir o fluxo e os padrões descritos em [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md). Antes de iniciar uma alteração, consulte a documentação relacionada, mantenha os arquivos organizados em seus diretórios e utilize pull requests para revisão conforme as regras do repositório.
+As contribuições devem seguir o fluxo e os padrões descritos em [docs/guia_contribuicao_git_github.md](./docs/CONTRIBUTING.md). Antes de iniciar uma alteração, consulte a documentação relacionada, mantenha os arquivos organizados em seus diretórios e utilize pull requests para revisão conforme as regras do repositório.
 
 ## Contexto acadêmico
 
