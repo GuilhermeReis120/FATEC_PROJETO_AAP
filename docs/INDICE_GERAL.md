@@ -32,13 +32,6 @@ Consulte os requisitos consolidados para verificar o escopo vigente e a monograf
 - [Diagrama geral de casos de uso da monografia](Monografia/UML_Diagrama_geral_UC.png)
 - [Diagrama entidade-relacionamento da monografia](Monografia/DER.png)
 
-## Referências de modelagem e arquitetura
-
-- BPMN do processo atual (AS-IS) — [PDF](BPMN/PDF/modelo_bpmn_as_is.pdf) · [Modelo editável](BPMN/MODEL/diagrama_bpmn_as_is.bpm)
-- BPMN do processo proposto (TO-BE) — [PDF](BPMN/PDF/modelo_bpmn_to_be.pdf) · [Modelo editável](BPMN/MODEL/diagrama_bpmn_to_be.bpm)
-- [Capítulo de modelagem do DER](DER/capitulo_modelagem_der_nexusdev.docx)
-- [Definição dos módulos da aplicação](Arquitetura/Definicao_Modulos_Aplicacao.docx)
-- [ADR-001 — Stack tecnológica e arquitetura](stack/ADR-001_stack_tecnologica_arquitetura_nexusdev.docx)
 
 ## Histórico
 
