@@ -2,16 +2,11 @@
 
 # NexusDev — Projeto Integrador FATEC
 
-> Plataforma proposta para apoiar a organização dos processos internos de uma software house, reunindo informações comerciais e acompanhamento operacional em um ambiente centralizado.
+> Plataforma proposta para centralizar o cadastro de clientes, o histórico de interações e a elaboração de propostas comerciais de uma software house.
 
 ## Sobre o projeto
 
-O **NexusDev** é o projeto desenvolvido no âmbito do Projeto Integrador do curso de Gestão da Tecnologia da Informação da FATEC Barueri. A solução busca melhorar a organização e a rastreabilidade dos processos da empresa, reduzindo a dispersão de informações entre ferramentas e facilitando o acompanhamento das atividades.
-
-A proposta contempla dois eixos principais:
-
-- **Gestão comercial (CRM):** utilização do **Krayin CRM** como base para apoiar o gerenciamento de leads, etapas do funil comercial, histórico de interações e elaboração de propostas comerciais. O NexusDev aproveita a solução de CRM existente e a complementa conforme as necessidades definidas para o projeto.
-- **Gestão operacional e de projetos:** organização de equipes, atividades, prazos e acompanhamento do andamento do trabalho, com informações centralizadas para apoiar a gestão.
+O **NexusDev** é desenvolvido no âmbito do Projeto Integrador do curso de Gestão da Tecnologia da Informação da FATEC Barueri. A solução usa o **Krayin CRM** como base para o cadastro direto de clientes, o registro do histórico de interações e a elaboração de propostas comerciais.
 
 O sistema é direcionado aos usuários internos da organização. Os perfis de acesso considerados no escopo atual são **Administrador**, **Gestor** e **Usuário operacional**, respeitando as permissões atribuídas a cada perfil.
 
@@ -38,7 +33,7 @@ FATEC_PROJETO_AAP/
     ├── BPMN/
     ├── DER/
     ├── Declaracao_PI/
-    ├── Levantamento de Requisitos/
+    ├── Levantamento_de_Requisitos/
     ├── Matriz_Rastreabilidade/
     ├── Monografia/
     ├── Padronizacao/
@@ -50,6 +45,8 @@ FATEC_PROJETO_AAP/
 
 ## Documentação
 
+Para localizar as especificações vigentes e os artefatos da entrega, consulte o [índice geral da documentação](./docs/INDICE_GERAL.md).
+
 A documentação está organizada por assunto:
 
 | Diretório | Conteúdo |
@@ -58,7 +55,7 @@ A documentação está organizada por assunto:
 | [BPMN](./docs/BPMN) | Modelagem dos processos de negócio |
 | [DER](./docs/DER) | Diagrama e documentação do modelo de dados |
 | [Declaração do PI](./docs/Declaracao_PI) | Documento de formalização do Projeto Integrador |
-| [Levantamento de Requisitos](./docs/Levantamento%20de%20Requisitos) | Levantamento, análise e detalhamento dos requisitos |
+| [Levantamento de Requisitos](./docs/Levantamento%20de%20Requisitos) | Histórico do levantamento e da evolução do escopo |
 | [Matriz de Rastreabilidade](./docs/Matriz_Rastreabilidade) | Relação entre requisitos e artefatos do projeto |
 | [Monografia](./docs/Monografia) | Documento acadêmico do projeto |
 | [Padronização](./docs/Padronizacao) | Materiais de referência e padronização |
@@ -69,12 +66,12 @@ A documentação está organizada por assunto:
 
 ### Links úteis
 
-- [Guia de contribuição e fluxo Git](./docs/guia_contribuicao_git_github.md.md)
+- [Guia de contribuição e fluxo Git](./docs/guia_contribuicao_git_github.md)
 - [Quadro de acompanhamento da equipe no Trello](https://trello.com/b/alTkE0Y8/209-aap2-aap3-c%C3%B3digo5)
 
 ## Fluxo de contribuição
 
-As contribuições devem seguir o fluxo e os padrões descritos em [docs/guia_contribuicao_git_github.md](./docs/CONTRIBUTING.md). Antes de iniciar uma alteração, consulte a documentação relacionada, mantenha os arquivos organizados em seus diretórios e utilize pull requests para revisão conforme as regras do repositório.
+As contribuições devem seguir o fluxo e os padrões descritos em [docs/guia_contribuicao_git_github.md](./docs/guia_contribuicao_git_github.md). Antes de iniciar uma alteração, consulte a documentação relacionada, mantenha os arquivos organizados em seus diretórios e utilize pull requests para revisão conforme as regras do repositório.
 
 ## Contexto acadêmico
 
